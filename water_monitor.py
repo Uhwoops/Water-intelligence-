@@ -2,16 +2,6 @@
 water_monitor.py  —  Week 3 of the Water Quality Intelligence Project
 Builds a WaterQualityMonitor class with ML-based anomaly detection.
 
-New concepts this week:
-  - Classes and Object Oriented Programming (OOP)
-  - The __init__ method (constructor)
-  - Instance variables (self.something)
-  - The logging module (professional alternative to print)
-  - Isolation Forest (unsupervised ML anomaly detection)
-  - List comprehensions (advanced filtering)
-  - Generating a text report from code
-"""
-
 import pandas as pd
 import numpy as np
 import logging
@@ -21,14 +11,7 @@ from pathlib import Path
 from sklearn.ensemble import IsolationForest
 
 
-# ── Logging setup ─────────────────────────────────────────────────────────────
-# logging is the professional way to record what your program does.
-# Unlike print(), logs have:
-#   - A timestamp on every line
-#   - A severity level: DEBUG, INFO, WARNING, ERROR, CRITICAL
-#   - Output to BOTH the terminal and a log file simultaneously
-#
-# basicConfig sets up the format once. Every logger in the program uses it.
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  [%(levelname)s]  %(message)s",
@@ -175,31 +158,28 @@ class WaterQualityMonitor:
         contamination = the fraction of data we expect to be anomalous.
         0.05 means "I expect about 5% of days to be unusual."
         """
-        # Select the features to train on
-        # These are the columns the model will look at together
+       
         features = ["flow_cfs", "flow_7day_avg", "flow_7day_std", "flow_ratio"]
         X = self.df[features].fillna(0)   # fill any NaN with 0 for the model
 
-        # Create and fit the model
-        # random_state=42 makes results reproducible (same result every run)
+       
         self.model = IsolationForest(
             contamination=contamination,
             random_state=42,
             n_estimators=100,    # number of isolation trees — more = more stable
         )
 
-        # fit_predict() trains the model AND labels every row in one call
-        # Returns: -1 = anomaly, 1 = normal
+        
         predictions = self.model.fit_predict(X)
 
         # Also get the raw anomaly score (lower = more anomalous)
         scores = self.model.score_samples(X)
 
-        # Add results back to the DataFrame
+        
         self.df["anomaly_flag"]  = predictions          # -1 or 1
         self.df["anomaly_score"] = scores.round(4)
 
-        # Filter to just the anomaly rows
+        
         anomaly_mask   = self.df["anomaly_flag"] == -1
         self.anomalies = self.df[anomaly_mask].copy()
         self.anomalies["method"] = "isolation_forest"
@@ -225,9 +205,9 @@ class WaterQualityMonitor:
         stat_dates = set(statistical.index)
         ml_dates   = set(ml.index)
 
-        both   = stat_dates & ml_dates      # intersection — both methods agree
-        only_stat = stat_dates - ml_dates   # only statistical caught it
-        only_ml   = ml_dates - stat_dates   # only ML caught it
+        both   = stat_dates & ml_dates      
+        only_stat = stat_dates - ml_dates   
+        only_ml   = ml_dates - stat_dates   
 
         print("\n══ METHOD COMPARISON ═══════════════════════════════")
         print(f"  Statistical (2σ) anomalies : {len(stat_dates)}")
@@ -310,10 +290,10 @@ class WaterQualityMonitor:
 
         report_text = "\n".join(lines)
 
-        # Print to terminal
+        
         print(report_text)
 
-        # Write to file
+        
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write(report_text)
 
