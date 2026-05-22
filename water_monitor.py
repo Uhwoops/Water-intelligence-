@@ -1,7 +1,7 @@
 """
 water_monitor.py  —  Week 3 of the Water Quality Intelligence Project
 Builds a WaterQualityMonitor class with ML-based anomaly detection.
-
+"""
 import pandas as pd
 import numpy as np
 import logging
