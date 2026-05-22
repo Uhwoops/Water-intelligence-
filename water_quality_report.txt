@@ -1,0 +1,37 @@
+════════════════════════════════════════════════════════════
+  WATER QUALITY MONITORING REPORT
+  Generated: 2026-05-22 15:04
+════════════════════════════════════════════════════════════
+
+STATION INFORMATION
+  Name      : LITTLE HOPE CR AT SENECA PLACE AT CHARLOTTE, NC
+  Period    : 2026-01-19  →  2026-05-19
+  Days      : 121
+
+FLOW STATISTICS
+  Mean flow   : 1.751 cfs
+  Median flow : 0.75 cfs
+  Std dev     : 3.772 cfs
+  Peak flow   : 29.4 cfs  (2026-02-15)
+  Lowest flow : 0.31 cfs  (2026-05-05)
+  Low-flow days (<0.5 cfs): 25.6% of record
+
+ANOMALY DETECTION (Isolation Forest)
+  Total anomalous days: 6
+
+  Date          Flow (cfs)   7-day avg    Ratio    Score
+  --------------------------------------------------------
+  2026-02-15       29.40       5.59      5.26    -0.7590
+  2026-05-07       24.30       4.80      5.07    -0.7353
+  2026-02-26       12.00       3.35      3.58    -0.6599
+  2026-03-16       10.20       3.61      2.82    -0.6507
+  2026-05-06        7.61       1.38      5.53    -0.6664
+  2026-02-21        2.89       6.12      0.47    -0.6448
+
+INTERPRETATION
+  Days with anomaly_score near -0.5 or lower are most suspicious.
+  High flow_ratio (>3.0) means the day was 3x above recent average.
+  Cross-reference spike dates with local precipitation records
+  to confirm storm events vs potential sensor or data issues.
+
+════════════════════════════════════════════════════════════
