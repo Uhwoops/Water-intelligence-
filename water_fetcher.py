@@ -3,15 +3,13 @@ water_fetcher.py  —  Week 1 of the Water Quality Intelligence Project
 Fetches streamflow data from the USGS Water Services API and saves it to a CSV.
 """
 
-import requests   # for making HTTP calls to the API
-import csv        # for writing the output file
-import json       # for pretty-printing raw responses while you're learning
-from datetime import datetime, timedelta  # for building date strings
+import requests   
+import csv        
+import json       
+from datetime import datetime, timedelta  
 
 
 # ── Configuration ────────────────────────────────────────────────────────────
-# This is a real USGS station: French Broad River at Asheville, NC.
-# Find others at: https://waterdata.usgs.gov/nwis/rt
 STATION_ID = "02146470"
 
 # How many days back to fetch
@@ -20,7 +18,6 @@ DAYS_BACK = 120
 # The parameter code for streamflow (discharge) in cubic feet per second
 PARAMETER_CODE = "00060"
 
-# Where to save the output
 OUTPUT_FILE = "streamflow_data.csv"
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -32,8 +29,6 @@ def build_url(station_id: str, days_back: int, param_code: str) -> str:
     A URL has two parts:
       - The base path:  https://waterservices.usgs.gov/nwis/dv/
       - Query params:   ?site=...&startDT=...&endDT=...&format=json
-
-    We use an f-string to inject our variables into the string.
     """
     end_date   = datetime.today() - timedelta(days=3)   # USGS daily values lag ~1-3 days
     start_date = end_date - timedelta(days=days_back)
@@ -56,13 +51,7 @@ def build_url(station_id: str, days_back: int, param_code: str) -> str:
 
 
 def fetch_data(url: str) -> dict | None:
-    """
-    Makes the HTTP GET request and returns the parsed JSON as a Python dict.
-
-    The try/except block catches two problems:
-      - requests.exceptions.RequestException: network failure, timeout, etc.
-      - ValueError: the response arrived but wasn't valid JSON
-    """
+   
     try:
         print(f"Fetching: {url}\n")
         response = requests.get(url, timeout=10)
@@ -106,8 +95,7 @@ def parse_readings(raw_data: dict) -> list[dict]:
             print("No data returned for this station / date range.")
             return readings
 
-        # Loop every series and inspect it before deciding which to use
-        # This is more defensive than assuming [0] is the right one
+       
         chosen_series  = None
         chosen_values  = []
 
@@ -120,19 +108,19 @@ def parse_readings(raw_data: dict) -> list[dict]:
                 if opt.get("name") == "Statistic":
                     stat_code = opt.get("optionCode")
 
-            # Grab the value list for this series
+           
             value_list = series["values"][0]["value"]
 
             print(f"  Found series: statCode={stat_code}, rows={len(value_list)}")
 
-            # We want Mean (00003) and it must actually have rows
+         
             if stat_code == "00003" and len(value_list) > 0:
                 chosen_series = series
                 chosen_values = value_list
                 break   # stop as soon as we find a good one
 
         if not chosen_series:
-            # Fallback: if no Mean series found, just take the longest non-empty one
+            
             print("\n  No Mean series found — falling back to longest series with data.")
             for series in time_series:
                 value_list = series["values"][0]["value"]
@@ -155,9 +143,9 @@ def parse_readings(raw_data: dict) -> list[dict]:
             raw_dt    = entry["dateTime"]
             raw_value = entry["value"]
 
-            date_str = raw_dt.split("T")[0]   # "2026-01-15T00:00:00" → "2026-01-15"
+            date_str = raw_dt.split("T")[0]   
 
-            # -999999 is USGS sentinel for missing / not approved
+          
             if raw_value in ("-999999", ""):
                 flow_cfs = None
             else:
@@ -192,8 +180,6 @@ def save_to_csv(readings: list[dict], filepath: str) -> None:
 
     fieldnames = ["date", "station_id", "site_name", "flow_cfs"]
 
-    # "w" = write mode (creates the file if it doesn't exist, overwrites if it does)
-    # newline="" is required on Windows to prevent double line breaks
     with open(filepath, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()          # writes the column name row
@@ -230,10 +216,6 @@ def summarize(readings: list[dict]) -> None:
 
 
 # ── Main entry point ──────────────────────────────────────────────────────────
-# This pattern — if __name__ == "__main__" — means:
-# "Only run this block when the script is executed directly."
-# If another script imports this file later, this block is skipped.
-# It's the standard way to structure Python scripts.
 if __name__ == "__main__":
     url      = build_url(STATION_ID, DAYS_BACK, PARAMETER_CODE)
     raw_data = fetch_data(url)
