@@ -2,12 +2,7 @@
 water_visualizer.py  —  Week 2B of the Water Quality Intelligence Project
 Loads the streamflow CSV and produces 3 saved chart images.
 
-New concepts this week:
-  - matplotlib figure and axes structure
-  - Line charts, bar charts, and annotations
-  - Subplots (multiple charts in one figure)
-  - Saving charts as image files
-  - Styling: colors, labels, gridlines, legends
+
 """
 
 import pandas as pd
