@@ -22,9 +22,9 @@
     --mono:     'IBM Plex Mono', monospace;
     --sans:     'DM Sans', sans-serif;
   }
-
+ 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -32,8 +32,7 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-
-  /* animated grid background */
+ 
   body::before {
     content: '';
     position: fixed;
@@ -45,10 +44,9 @@
     pointer-events: none;
     z-index: 0;
   }
-
+ 
   .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-
-  /* ── Header ── */
+ 
   header { margin-bottom: 2.5rem; animation: fadeUp .6s ease both; }
   .header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .station-tag {
@@ -67,8 +65,7 @@
   h1 span { color: var(--accent); }
   .header-meta { font-size: 13px; color: var(--muted); margin-top: 6px; font-family: var(--mono); }
   .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 6px; animation: pulse 2s infinite; }
-
-  /* ── Metric cards ── */
+ 
   .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .card {
     background: var(--bg2);
@@ -79,12 +76,7 @@
     overflow: hidden;
     animation: fadeUp .6s ease both;
   }
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
   .card.blue::before  { background: var(--accent); }
   .card.red::before   { background: var(--danger); }
   .card.green::before { background: var(--ok); }
@@ -96,8 +88,7 @@
   .card.green .card-value { color: var(--ok); }
   .card.amber .card-value { color: var(--warn); }
   .card-sub { font-size: 12px; color: var(--muted); }
-
-  /* ── Section titles ── */
+ 
   .section-title {
     font-family: var(--mono);
     font-size: 11px;
@@ -110,8 +101,7 @@
     gap: 8px;
   }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  /* ── Chart panel ── */
+ 
   .panel {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -123,12 +113,10 @@
   .panel-title { font-size: 14px; font-weight: 500; margin-bottom: 1.25rem; color: var(--text); }
   .panel-title span { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: 8px; }
   .chart-wrap { position: relative; height: 260px; }
-
-  /* ── Two column layout ── */
+ 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
   @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
-
-  /* ── Anomaly table ── */
+ 
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th {
     font-family: var(--mono);
@@ -143,19 +131,12 @@
   td { padding: 10px 12px; border-bottom: 1px solid rgba(30,58,95,.5); }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--bg3); }
-  .badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  .badge-red    { background: rgba(248,113,113,.15); color: var(--danger); }
-  .badge-amber  { background: rgba(251,191,36,.15);  color: var(--warn); }
+  .badge { font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
+  .badge-red   { background: rgba(248,113,113,.15); color: var(--danger); }
+  .badge-amber { background: rgba(251,191,36,.15);  color: var(--warn); }
   .score-bar { width: 60px; height: 4px; background: var(--bg3); border-radius: 2px; display: inline-block; vertical-align: middle; margin-left: 6px; }
   .score-fill { height: 100%; border-radius: 2px; background: var(--danger); }
-
-  /* ── Monthly bars ── */
+ 
   .month-bars { display: flex; align-items: flex-end; gap: 12px; height: 140px; padding-top: 1rem; }
   .month-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
   .month-bar { width: 100%; border-radius: 4px 4px 0 0; background: var(--accent2); opacity: .7; transition: opacity .2s; min-height: 4px; }
@@ -164,8 +145,7 @@
   .month-bar.lowest  { background: var(--ok); opacity: .85; }
   .month-val { font-family: var(--mono); font-size: 10px; color: var(--accent); }
   .month-label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-
-  /* ── Map placeholder ── */
+ 
   .map-box {
     background: var(--bg3);
     border-radius: 8px;
@@ -193,8 +173,7 @@
   }
   .map-ripple:nth-child(2) { animation-delay: .8s; }
   .map-ripple:nth-child(3) { animation-delay: 1.6s; }
-
-  /* ── Download btn ── */
+ 
   .dl-btn {
     display: inline-flex;
     align-items: center;
@@ -213,11 +192,9 @@
     text-decoration: none;
   }
   .dl-btn:hover { background: var(--accent); color: var(--bg); }
-
-  /* ── Footer ── */
+ 
   footer { margin-top: 3rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--muted); }
-
-  /* ── Animations ── */
+ 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -230,7 +207,7 @@
     0%   { transform: scale(.5); opacity: .6; }
     100% { transform: scale(3);  opacity: 0; }
   }
-
+ 
   .card:nth-child(1) { animation-delay: .05s; }
   .card:nth-child(2) { animation-delay: .10s; }
   .card:nth-child(3) { animation-delay: .15s; }
@@ -239,8 +216,7 @@
 </head>
 <body>
 <div class="wrap">
-
-  <!-- Header -->
+ 
   <header>
     <div class="header-top">
       <div>
@@ -255,8 +231,7 @@
       </div>
     </div>
   </header>
-
-  <!-- Metric cards -->
+ 
   <div class="section-title">Overview</div>
   <div class="metrics">
     <div class="card blue">
@@ -280,8 +255,7 @@
       <div class="card-sub">below 0.5 cfs — near-dry</div>
     </div>
   </div>
-
-  <!-- Main chart -->
+ 
   <div class="section-title">Streamflow Time Series</div>
   <div class="panel">
     <div class="panel-title">Daily Flow (cfs) <span>with 7-day rolling average · anomaly markers in red</span></div>
@@ -289,8 +263,7 @@
       <canvas id="flowChart"></canvas>
     </div>
   </div>
-
-  <!-- Two column: monthly + map -->
+ 
   <div class="two-col">
     <div class="panel">
       <div class="panel-title">Monthly Average Flow <span>cfs</span></div>
@@ -306,12 +279,11 @@
         <div style="font-weight:500;">Little Hope Creek</div>
         <div class="map-coords">35.1644° N · 80.8531° W</div>
         <div style="font-size:11px;">Urban watershed · Charlotte, NC</div>
-        <a href="https://waterdata.usgs.gov/monitoring-location/02146470/" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-top:4px;">View on USGS ↗</a>
+        <a href="https://waterdata.usgs.gov/monitoring-location/02146470/" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-top:4px;">View on USGS</a>
       </div>
     </div>
   </div>
-
-  <!-- Anomaly table -->
+ 
   <div class="section-title">Anomaly Detection Log</div>
   <div class="panel">
     <div class="panel-title">Isolation Forest ML Results <span>contamination=0.05 · n_estimators=100</span></div>
@@ -328,18 +300,17 @@
       </thead>
       <tbody id="anomalyBody"></tbody>
     </table>
-    <a class="dl-btn" id="dlBtn" download="water_quality_report.txt">⬇ Download Report</a>
+    <a class="dl-btn" id="dlBtn" download="water_quality_report.txt">Download Report</a>
   </div>
-
+ 
   <footer>
     Built with Python · USGS Water Services API · pandas · scikit-learn · Chart.js<br>
     Water Quality Intelligence Pipeline — Charlotte, NC
   </footer>
-
+ 
 </div>
-
+ 
 <script>
-// ── Real data from your project ───────────────────────────────────────────────
 const flowData = [
   {d:"Jan 16",v:0.43},{d:"Jan 17",v:0.44},{d:"Jan 18",v:2.64},{d:"Jan 19",v:0.70},
   {d:"Jan 20",v:0.52},{d:"Jan 21",v:0.54},{d:"Jan 22",v:0.53},{d:"Jan 23",v:0.55},
@@ -373,45 +344,39 @@ const flowData = [
   {d:"May 09",v:0.58},{d:"May 10",v:0.51},{d:"May 11",v:0.46},{d:"May 12",v:0.49},
   {d:"May 13",v:0.46},{d:"May 14",v:0.43},{d:"May 15",v:0.40},{d:"May 16",v:0.40},
 ];
-
+ 
 const anomalies = [
-  {date:"2026-02-15", flow:29.40, avg:5.59,  ratio:5.26, score:-0.7686},
-  {date:"2026-05-07", flow:24.30, avg:4.80,  ratio:5.07, score:-0.7388},
-  {date:"2026-02-26", flow:12.00, avg:3.35,  ratio:3.58, score:-0.6631},
-  {date:"2026-05-06", flow:7.61,  avg:1.38,  ratio:5.53, score:-0.6663},
-  {date:"2026-03-16", flow:10.20, avg:3.61,  ratio:2.82, score:-0.6538},
-  {date:"2026-03-12", flow:9.78,  avg:2.07,  ratio:4.72, score:-0.6406},
+  {date:"2026-02-15", flow:29.40, avg:5.59, ratio:5.26, score:-0.7686},
+  {date:"2026-05-07", flow:24.30, avg:4.80, ratio:5.07, score:-0.7388},
+  {date:"2026-02-26", flow:12.00, avg:3.35, ratio:3.58, score:-0.6631},
+  {date:"2026-05-06", flow:7.61,  avg:1.38, ratio:5.53, score:-0.6663},
+  {date:"2026-03-16", flow:10.20, avg:3.61, ratio:2.82, score:-0.6538},
+  {date:"2026-03-12", flow:9.78,  avg:2.07, ratio:4.72, score:-0.6406},
 ];
-
+ 
 const monthly = [
   {m:"Jan",v:1.13},{m:"Feb",v:3.37},{m:"Mar",v:1.44},{m:"Apr",v:0.64},{m:"May",v:2.39}
 ];
-
-// ── Rolling average helper ─────────────────────────────────────────────────
+ 
 function rollingAvg(arr, w) {
   return arr.map((_, i) => {
     const slice = arr.slice(Math.max(0, i - w + 1), i + 1);
     return +(slice.reduce((a,b)=>a+b,0)/slice.length).toFixed(3);
   });
 }
-
-// ── Anomaly index set ──────────────────────────────────────────────────────
+ 
 const anomalyLabels = new Set(anomalies.map(a => {
   const d = new Date(a.date);
   return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).replace(' ','\ ');
 }));
-
-// ── Main flow chart ────────────────────────────────────────────────────────
+ 
 const labels  = flowData.map(d => d.d);
 const values  = flowData.map(d => d.v);
 const rolling = rollingAvg(values, 7);
-
-// Point colors — red for anomaly days, transparent otherwise
-const pointColors = labels.map(l =>
-  anomalyLabels.has(l) ? 'rgba(248,113,113,1)' : 'rgba(0,0,0,0)'
-);
+ 
+const pointColors = labels.map(l => anomalyLabels.has(l) ? 'rgba(248,113,113,1)' : 'rgba(0,0,0,0)');
 const pointRadius = labels.map(l => anomalyLabels.has(l) ? 6 : 0);
-
+ 
 const ctx = document.getElementById('flowChart').getContext('2d');
 new Chart(ctx, {
   type: 'line',
@@ -464,19 +429,14 @@ new Chart(ctx, {
         callbacks: {
           afterBody: (items) => {
             const l = items[0].label;
-            return anomalyLabels.has(l) ? ['⚠ ML Anomaly flagged'] : [];
+            return anomalyLabels.has(l) ? ['ML Anomaly flagged'] : [];
           }
         }
       }
     },
     scales: {
       x: {
-        ticks: {
-          color: '#475569',
-          font: { family: 'IBM Plex Mono', size: 9 },
-          maxTicksLimit: 20,
-          maxRotation: 45,
-        },
+        ticks: { color: '#475569', font: { family: 'IBM Plex Mono', size: 9 }, maxTicksLimit: 20, maxRotation: 45 },
         grid: { color: 'rgba(30,58,95,.4)' }
       },
       y: {
@@ -487,12 +447,11 @@ new Chart(ctx, {
     }
   }
 });
-
-// ── Monthly bars ───────────────────────────────────────────────────────────
+ 
 const maxMonthly = Math.max(...monthly.map(m => m.v));
 const minMonthly = Math.min(...monthly.map(m => m.v));
 const container  = document.getElementById('monthBars');
-
+ 
 monthly.forEach(m => {
   const pct  = (m.v / maxMonthly) * 100;
   const isHi = m.v === maxMonthly;
@@ -506,19 +465,18 @@ monthly.forEach(m => {
   `;
   container.appendChild(col);
 });
-
-// ── Anomaly table ──────────────────────────────────────────────────────────
+ 
 const tbody = document.getElementById('anomalyBody');
 anomalies.forEach(a => {
-  const severity = a.score < -0.72 ? 'High' : 'Moderate';
+  const severity   = a.score < -0.72 ? 'High' : 'Moderate';
   const badgeClass = severity === 'High' ? 'badge-red' : 'badge-amber';
-  const barWidth  = Math.round((Math.abs(a.score) / 0.8) * 100);
+  const barWidth   = Math.round((Math.abs(a.score) / 0.8) * 100);
   tbody.innerHTML += `
     <tr>
       <td style="font-family:var(--mono);color:var(--accent)">${a.date}</td>
       <td style="font-weight:500">${a.flow.toFixed(2)}</td>
       <td style="color:var(--muted)">${a.avg.toFixed(2)}</td>
-      <td style="color:var(--warn)">${a.ratio.toFixed(2)}×</td>
+      <td style="color:var(--warn)">${a.ratio.toFixed(2)}x</td>
       <td>
         <span style="font-family:var(--mono);font-size:12px">${a.score.toFixed(4)}</span>
         <span class="score-bar"><span class="score-fill" style="width:${barWidth}%"></span></span>
@@ -527,49 +485,48 @@ anomalies.forEach(a => {
     </tr>
   `;
 });
-
-// ── Download report ────────────────────────────────────────────────────────
+ 
 const reportText = `WATER QUALITY MONITORING REPORT
 Generated: ${new Date().toLocaleString()}
 ${'='.repeat(50)}
 Station : LITTLE HOPE CR AT SENECA PLACE AT CHARLOTTE, NC
 Period  : 2026-01-16 to 2026-05-16
 Days    : 121
-
+ 
 FLOW STATISTICS
   Mean    : 1.771 cfs
   Median  : 0.75 cfs
   Peak    : 29.4 cfs on 2026-02-15
   Minimum : 0.31 cfs on 2026-05-05
   Low-flow days (<0.5 cfs): 24.8%
-
+ 
 ANOMALIES DETECTED (Isolation Forest ML)
   Total: 6 days
-
+ 
   Date          Flow    Ratio    Score      Severity
-  ${'-'.repeat(50)}
   2026-02-15    29.40   5.26    -0.7686    High
   2026-05-07    24.30   5.07    -0.7388    High
   2026-02-26    12.00   3.58    -0.6631    Moderate
   2026-05-06     7.61   5.53    -0.6663    Moderate
   2026-03-16    10.20   2.82    -0.6538    Moderate
   2026-03-12     9.78   4.72    -0.6406    Moderate
-
+ 
 METHODOLOGY
   Anomaly detection: scikit-learn Isolation Forest
   contamination=0.05, n_estimators=100, random_state=42
   Features: flow_cfs, flow_7day_avg, flow_7day_std, flow_ratio
-  Statistical threshold (2-sigma): 9.31 cfs (5 detections)
+  Statistical threshold (2-sigma): 9.31 cfs — 5 detections
   ML model caught 1 additional event (May 6) missed by statistics.
-
+ 
 DATA SOURCE
   USGS Water Services API
   Station 02146470 - LITTLE HOPE CR AT SENECA PLACE AT CHARLOTTE, NC
   Parameter 00060: Streamflow, mean daily, ft3/s
 `;
-
+ 
 document.getElementById('dlBtn').href =
   'data:text/plain;charset=utf-8,' + encodeURIComponent(reportText);
 </script>
 </body>
 </html>
+ 
